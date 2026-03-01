@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
 import "dotenv/config";
 export const verifyEmail = (token, email) => {
+  console.log("MAIL_USER:", process.env.MAIL_USER);
+  console.log("MAIL_PASS exists:", !!process.env.MAIL_PASS);
+  
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -8,6 +11,7 @@ export const verifyEmail = (token, email) => {
       pass: process.env.MAIL_PASS,
     },
   });
+  
   const mailConfigurations = {
     // It should be a string of sender/server email
     from: process.env.MAIL_USER,
@@ -24,7 +28,10 @@ export const verifyEmail = (token, email) => {
            Thanks`,
   };
   transporter.sendMail(mailConfigurations, function (error, info) {
-    if (error) throw Error(error);
+    if (error) {
+      console.log("❌ EMAIL ERROR:", error.message); // 👈 change this also
+      return;
+    }
     console.log("Email Sent Successfully");
     console.log(info);
   });

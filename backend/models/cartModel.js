@@ -39,7 +39,10 @@ const cartSchema = new mongoose.Schema(
         },
       },
     ],
+     
+  
   },
+  
   // ✅ timestamps stays here as the second argument (options)
   { timestamps: true },
 );

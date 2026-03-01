@@ -39,6 +39,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import API_URL from "@/config/api";
 
 const AdminProduct = () => {
   const { products } = useSelector((store) => store.product);
@@ -142,7 +143,7 @@ const AdminProduct = () => {
   const deleteProductHandler = async (productId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/v1/product/delete/${productId}`,
+        `${API_URL}/api/v1/product/delete/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

@@ -63,6 +63,7 @@ export const userSchema = new mongoose.Schema(
     phoneNo: {
       type: String,
     },
+    
   },
   {
     timestamps: true,

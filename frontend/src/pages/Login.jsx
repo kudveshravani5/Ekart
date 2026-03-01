@@ -17,6 +17,7 @@ import axios from "axios"
 import { toast } from "sonner"
 import { useDispatch } from "react-redux"
 import { setUser } from "../redux/userSlice"
+import API_URL from "@/config/api"
 const Login = () => {
   const [loading,setLoading] = useState(false)
     const [showPassword,setShowPassword] = useState(false)
@@ -38,7 +39,7 @@ const Login = () => {
       console.log(formData);
       try {
         setLoading(true)
-        const res = await axios.post(`http://localhost:5000/api/v1/user/login`,formData,{
+        const res = await axios.post(`${API_URL}/api/v1/user/login`,formData,{
           headers:{
             "Content-Type":"application/json"
           }

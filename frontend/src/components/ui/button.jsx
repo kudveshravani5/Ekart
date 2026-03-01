@@ -58,3 +58,231 @@ function Button({
 }
 
 export { Button, buttonVariants }
+// ========== FILE: src/components/ui/Button.jsx ==========
+// Reusable button components - ALL TAILWIND
+
+
+// ========== PRIMARY BUTTON ==========
+export const ButtonPrimary = ({ children, onClick, disabled = false, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        bg-primary-600 
+        text-white 
+        px-6 py-3 
+        rounded-lg 
+        font-semibold
+        transition-colors duration-200
+        hover:bg-primary-700
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ========== SECONDARY BUTTON ==========
+export const ButtonSecondary = ({ children, onClick, disabled = false, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        bg-gray-200 
+        text-gray-800 
+        px-6 py-3 
+        rounded-lg 
+        font-semibold
+        transition-colors duration-200
+        hover:bg-gray-300
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ========== GESTURE BUTTON ==========
+export const ButtonGesture = ({ children, onClick, active = false, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        ${active ? 'bg-gesture-active' : 'bg-gesture-inactive'}
+        text-white 
+        px-4 py-2 
+        rounded-full 
+        font-medium
+        transition-all duration-200
+        hover:scale-105
+        ${active ? 'hover:bg-green-600' : 'hover:bg-gray-600'}
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ========== DANGER BUTTON ==========
+export const ButtonDanger = ({ children, onClick, disabled = false, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        bg-danger 
+        text-white 
+        px-6 py-3 
+        rounded-lg 
+        font-semibold
+        transition-colors duration-200
+        hover:bg-danger-600
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ========== WARNING BUTTON ==========
+export const ButtonWarning = ({ children, onClick, disabled = false, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        bg-warning 
+        text-white 
+        px-6 py-3 
+        rounded-lg 
+        font-semibold
+        transition-colors duration-200
+        hover:bg-warning-600
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ========== OUTLINE BUTTON ==========
+export const ButtonOutline = ({ children, onClick, disabled = false, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        bg-transparent 
+        border-2 border-primary 
+        text-primary 
+        px-6 py-3 
+        rounded-lg 
+        font-semibold
+        transition-all duration-200
+        hover:bg-primary hover:text-white
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        ${className}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+// ========== ICON BUTTON ==========
+export const ButtonIcon = ({ icon, onClick, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        w-10 h-10 
+        flex items-center justify-center
+        rounded-full 
+        bg-gray-100
+        text-gray-700
+        transition-all duration-200
+        hover:bg-gray-200 hover:scale-110
+        ${className}
+      `}
+    >
+      {icon}
+    </button>
+  );
+};
+
+// ========== LOADING BUTTON ==========
+export const ButtonLoading = ({ children, loading = false, onClick, className = '' }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={loading}
+      className={`
+        bg-primary-600 
+        text-white 
+        px-6 py-3 
+        rounded-lg 
+        font-semibold
+        transition-colors duration-200
+        hover:bg-primary-700
+        disabled:opacity-50 
+        disabled:cursor-not-allowed
+        flex items-center justify-center gap-2
+        ${className}
+      `}
+    >
+      {loading && (
+        <div className="
+          animate-spin 
+          rounded-full 
+          h-4 w-4 
+          border-b-2 border-white
+        " />
+      )}
+      {children}
+    </button>
+  );
+};
+
+// ========== DEFAULT EXPORT ==========
+export default ButtonPrimary;
+
+// ========== HOW TO USE ==========
+/*
+import Button, { 
+  ButtonPrimary, 
+  ButtonSecondary, 
+  ButtonGesture,
+  ButtonDanger,
+  ButtonOutline,
+  ButtonLoading
+} from './components/ui/Button';
+
+// Usage:
+<ButtonPrimary onClick={handleClick}>
+  Click Me
+</ButtonPrimary>
+
+<ButtonGesture active={isActive} onClick={toggleGesture}>
+  ✋ Gesture Control
+</ButtonGesture>
+
+<ButtonLoading loading={isLoading} onClick={handleSubmit}>
+  Submit
+</ButtonLoading>
+*/

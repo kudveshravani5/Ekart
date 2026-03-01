@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import Ekart from "../../../public/Ekart.png";
 
 import { useSelector } from "react-redux";
-import userLogo from "../../../public/userLogo.png";
-
 
 /**
  * Mature UI Styles & Theme Constants
@@ -36,8 +33,8 @@ const Chatbot = () => {
   const fileRef = useRef(null);
   const scrollRef = useRef(null);
   const { user } = useSelector((store) => store.user);
-  const profilePic = user?.profilePic || userLogo;
-  const firstname = user?.firstname || " "
+  const profilePic = user?.profilePic || "/userLogo.png";
+  const firstname = user?.firstname || " ";
 
   useEffect(() => {
     localStorage.setItem("ekart_v2_history", JSON.stringify(history));
@@ -139,6 +136,27 @@ const Chatbot = () => {
       setAssets([]);
     }
   };
+  
+  // ... inside Chatbot component ...
+  const [isListening, setIsListening] = useState(false);
+
+  // ✨ AI VOICE INTEGRATION: Speech to Text logic
+  const handleVoiceInput = () => {
+    const recognition = new (
+      window.SpeechRecognition || window.webkitSpeechRecognition
+    )();
+    recognition.lang = "en-US";
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setQuestion(transcript); // Puts voice into your search bar
+      handleSubmit(null, transcript); // Auto-submits to Gemini
+    };
+    recognition.onend = () => setIsListening(false);
+    recognition.start();
+  };
+  
 
   return (
     <div className="flex h-screen bg-[#f1f3f5] text-[#333] font-sans">
@@ -148,7 +166,7 @@ const Chatbot = () => {
       >
         <div className="p-4 border-b border-gray-100 flex items-center justify-center">
           <img
-            src={Ekart}
+            src="/Ekart.png"
             alt="Ekart Logo"
             className="h-10 object-contain"
             onError={(e) => (e.target.style.display = "none")}
@@ -200,9 +218,9 @@ const Chatbot = () => {
                   alt="Profile"
                   className="w-10 h-10 rounded-full"
                 />
-              } 
+              }
             </div>
-             Hello, {firstname}
+            Hello, {firstname}
           </div>
         </div>
       </aside>
@@ -229,7 +247,7 @@ const Chatbot = () => {
           {currentChat.messages.length === 0 && !loading && (
             <div className="h-full flex flex-col items-center justify-center text-center opacity-40">
               <img
-                src={Ekart}
+                src="/Ekart.png"
                 alt="Ekart Logo"
                 className="h-20 grayscale opacity-20 mb-6"
               />
@@ -378,6 +396,12 @@ const Chatbot = () => {
                 className="text-[10px] font-bold text-gray-400 hover:text-[#e91e63] uppercase tracking-tighter"
               >
                 Price Watch
+              </button>
+              <button
+                onClick={handleVoiceInput}
+                className={`p-2 rounded-full transition-all ${isListening ? "bg-pink-600 animate-pulse" : "bg-pink-400"}`}
+              >
+                {isListening ? "Listening..." : "🎤"}
               </button>
             </div>
           </div>

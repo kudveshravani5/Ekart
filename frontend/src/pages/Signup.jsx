@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
 import axios from "axios"
 import { toast } from "sonner"
+import API_URL from "@/config/api"
 
 
 
@@ -41,7 +42,7 @@ const Signup = () => {
     console.log(formData);
     try {
       setLoading(true)
-      const res = await axios.post(`http://localhost:5000/api/v1/user/register`,formData,{
+      const res = await axios.post(`${API_URL}/api/v1/user/register`,formData,{
         headers:{
           "Content-Type":"application/json"
         }

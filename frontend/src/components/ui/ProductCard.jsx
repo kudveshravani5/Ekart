@@ -207,38 +207,8 @@ const ProductCard = ({ product = {}, loading = false }) => {
     ))}
   </div>
 )}
-      {/* Save for Later Items */}
-      {Array.isArray((cart?.saveForLater) &&
-        cart.saveForLater.length > 0 && (
-          <div className="mt-4">
-            <h2 className="font-bold mb-2">Save For Later</h2>
-            {cart.saveForLater.map((item) => (
-              <div
-                key={item.productId?._id}
-                className="flex justify-between items-center p-2 border rounded mb-2"
-              >
-                <span>{item.productId?.productName}</span>
-                <div className="space-x-2">
-                  <button
-                    onClick={() => moveToCart(item.productId?._id)}
-                    className="bg-green-500 text-white px-2 py-1 rounded"
-                  >
-                    Move to Cart
-                  </button>
-                  <button
-                    onClick={() => removeSaveForLater(item.productId?._id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        ),
-      )}
-    </div>
-  );
-};
+</div>
+  )}
+
 
 export default ProductCard;

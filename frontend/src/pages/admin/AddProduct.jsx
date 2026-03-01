@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { setProducts } from "@/redux/productSlice";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import API_URL from "@/config/api";
 
 
 
@@ -60,14 +61,14 @@ const AddProduct = () => {
     })
     try {
       setLoading(true)
-      const res = await axios.post(`http://localhost:5000/api/v1/product/add`,formData,{
+      const res = await axios.post(`${API_URL}/api/v1/product/add`,formData,{
         headers:{
           Authorization:`Bearer ${accessToken}`
         }
       })
       if(res.data.success){
         toast.success(res.data.message)
-        const allProducts = await axios.get("http://localhost:5000/api/v1/product/getallproducts");
+        const allProducts = await axios.get(`${API_URL}/api/v1/product/getallproducts`);
         dispatch(setProducts(allProducts.data.products));
       }
     

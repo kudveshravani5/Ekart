@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import API_URL from "@/config/api";
 
 const UserInfo = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const UserInfo = () => {
         setLoading(true)
         const res = await axios.put(
         
-        `http://localhost:5000/api/v1/user/update/${userId}`,
+        `${API_URL}/api/v1/user/update/${userId}`,
         formData,
         {
           headers: {
@@ -75,7 +76,7 @@ const UserInfo = () => {
   };
   const getUserDetails = async () =>{
     try {
-      const res = await axios.get(`http://localhost:5000/api/v1/user/get-user/${userId}`)
+      const res = await axios.get(`${API_URL}/api/v1/user/get-user/${userId}`)
       if(res.data.success){
         setUpdateUser(res.data.user)
       }

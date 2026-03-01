@@ -14,6 +14,7 @@ import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts, setFilteredProducts } from "../redux/productSlice";
+import API_URL from "@/config/api";
 
 const Products = () => {
   const [sortOrder, setSortOrder] = useState("");
@@ -41,7 +42,7 @@ const Products = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          "http://localhost:5000/api/v1/product/getallproducts",
+          `${API_URL}/api/v1/product/getallproducts`,
         );
         if (res.data.success) {
           dispatch(setProducts(res.data.products));
@@ -139,7 +140,7 @@ const Products = () => {
 
         {/* Main */}
         <div className="flex flex-col flex-1">
-          <div className="flex justify-end mb-8 relative z-50">
+          <div className="flex justify-end mb-8 relative z-20">
             <Select onValueChange={setSortOrder}>
               <SelectTrigger className="w-52">
                 <SelectValue placeholder="Sort by Price" />
@@ -149,8 +150,9 @@ const Products = () => {
                 side="bottom"
                 sideOffset={12}
                 align="end"
-                className="z-[9999]"
-              >
+                className="z-[9999] bg-white border border-gray-200 shadow-lg min-w-[var(--radix-select-trigger-width)]">
+                  
+              
                 <SelectGroup>
                   <SelectItem value="lowtohigh">Price: Low to High</SelectItem>
                   <SelectItem value="hightolow">Price: High to Low</SelectItem>

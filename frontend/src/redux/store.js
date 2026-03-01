@@ -9,19 +9,21 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  persistStore,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 const persistConfig = {
   key: 'Ekart',
   version: 1,
   storage,
+  timeout: null,
 }
 const rootReducer = combineReducers({
     user: userSlice,
     product:productSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -32,5 +34,5 @@ const store = configureStore({
 })
 
 
-
+export const persistor = persistStore(store);
 export default store

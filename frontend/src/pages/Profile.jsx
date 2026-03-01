@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,8 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import userLogo from "../assets/user.jpg";
 import { toast } from "sonner";
 import axios from "axios";
-import { setProfilePic, setUser } from "../redux/userSlice";
+import { setProfilePic, setUser } from "../redux/userSlice.js";
 import { Loader2 } from "lucide-react"
+import MyOrder from "../pages/MyOrder.jsx";
+import API_URL from "@/config/api";
 
 
 const Profile = () => {
@@ -76,7 +70,7 @@ const Profile = () => {
         setLoading(true)
         const res = await axios.put(
         
-        `http://localhost:5000/api/v1/user/update/${userId}`,
+        `${API_URL}/api/v1/user/update/${userId}`,
         formData,
         {
           headers: {
@@ -252,29 +246,7 @@ const Profile = () => {
         </TabsContent>
 
         <TabsContent value="orders">
-          <Card>
-            <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>Change your password</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              <Input
-                type="password"
-                name="currentPassword"
-                placeholder="Current password"
-              />
-              <Input
-                type="password"
-                name="newPassword"
-                placeholder="New password"
-              />
-            </CardContent>
-            <CardFooter>
-              <Button onClick={handleSubmit} className="w-full bg-pink-600">
-                Save password
-              </Button>
-            </CardFooter>
-          </Card>
+          <MyOrder/>
         </TabsContent>
       </Tabs>
     </div>

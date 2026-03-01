@@ -33,12 +33,25 @@ const productSlice = createSlice({
             state.addresses = state.addresses.filter((__, index)=>index !== action.payload)
             //Reset selectedAddress if it was deleted
             if(state.selectedAddress === action.payload){
-                state.addresses = null
+                state.selectedAddress = null
 
             }
+        },
+        addVoiceReviewToState: (state, action) => {
+            const { productId, voiceReview } = action.payload;
+            const product = state.products.find(p => p._id === productId);
+            if (product) {
+                if (!product.voiceReviews) product.voiceReviews = [];
+                product.voiceReviews.push(voiceReview);
+            }
+        },
+
+        // ✨ AI VOICE INTEGRATION: Direct cart update from AI command
+        updateCartFromVoice: (state, action) => {
+            state.cart = action.payload;
         }
     }   
 });
-export const {setProducts , setFilteredProducts, setCart, addAddress, setSelectedAddress, deleteAddress} = productSlice.actions;
+export const {setProducts , setFilteredProducts, setCart, addAddress, setSelectedAddress, deleteAddress,addVoiceReviewToState, updateCartFromVoice} = productSlice.actions;
 export default productSlice.reducer;
         

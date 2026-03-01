@@ -7,6 +7,7 @@ import { Edit, Eye, Search } from 'lucide-react'
 import React, { useEffect,useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import API_URL from "@/config/api"
 
 
 const AdminUsers = () => {
@@ -26,7 +27,7 @@ const AdminUsers = () => {
     const accessToken = localStorage.getItem("accessToken")
     try {
       
-      const res = await axios.get(`http://localhost:5000/api/v1/user/all-users`,{
+      const res = await axios.get(`${API_URL}/api/v1/user/all-users`,{
         headers:{
           Authorization:`Bearer ${accessToken}`
         }
@@ -70,7 +71,7 @@ const AdminUsers = () => {
               </div>
               <div className="flex gap-3 mt-3">
                 <Button className='bg-pink-300'onClick={()=>navigate(`/dashboard/users/${user?._id}`)} variant="outline"><Edit/>Edit</Button>
-                <Button className='bg-white'><Eye/>Show Order</Button>
+                <Button className='bg-white'onClick={()=>navigate(`/dashboard/users/orders/${user?._id}`)}><Eye/>Show Order</Button>
               </div>
             </div>
           })

@@ -2,7 +2,7 @@ import express from "express";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { multipleUploadChatfiles } from "../middleware/multer.js";
 
-const router = express.Router();
+const routers = express.Router();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ 
@@ -23,7 +23,7 @@ const generateWithRetry = async (contents, retries = 5) => {
   }
 };
 
-router.post("/", multipleUploadChatfiles, async (req, res) => {
+routers.post("/", multipleUploadChatfiles, async (req, res) => {
   try {
     const { question, editedImage, annotations } = req.body;
     const files = req.files;
@@ -84,4 +84,4 @@ router.post("/", multipleUploadChatfiles, async (req, res) => {
   }
 });
 
-export default router;
+export default routers;

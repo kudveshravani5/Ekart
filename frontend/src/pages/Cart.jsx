@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
+import API_URL from '@/config/api';
 
 
 
@@ -25,7 +26,7 @@ const Cart = () => {
     const dispatch = useDispatch()
     
     
-    const API = "http://localhost:5000/api/v1/cart"
+    const API = `${API_URL}/api/v1/cart`
     const accessToken = localStorage.getItem("accessToken");
     const loadCart = async () =>{
       try {
@@ -65,13 +66,13 @@ const Cart = () => {
     }
     const handleRemove = async (productId) =>{
       try {
-        const res = await axios.delete(`${API}/remove`, {
+        const res = await axios.delete(`${API}/remove/${productId}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`},
             data: { productId }});
         if(res.data.success){
           dispatch(setCart(res.data.cart))
-          toast.success('Product removed from cart')
+          
         }
         
       } catch (error) {
