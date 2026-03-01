@@ -31,7 +31,7 @@ const app = express();
   This allows frontend (Vite runs on 5173) to call backend APIs
 */
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5179", "https://ekart-8usi.onrender.com"],
+  origin: ["http://localhost:5173", "http://localhost:5179", "https://ekart-kudveshravani5s-projects.vercel.app"],
   credentials: true
 }));
 
